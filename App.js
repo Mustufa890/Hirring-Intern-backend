@@ -9,20 +9,31 @@ const { initSocket } = require('./socket');
 
 const app = express()
 app.use(express.json())
-server.use(cors({
+import cors from 'cors'; // ya const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://hirring-intern-production.up.railway.app'
+];
+
+app.use(cors({
   origin: function (origin, callback) {
-    // 1. Allow server-to-server, Postman, or local testing tools (no origin header)
+    // Postman ya server-to-server requests ke liye
     if (!origin) return callback(null, true);
     
-    // 2. Allow ANY subdomain or production domain containing your app name
-    if (origin.includes("hirring-intern") || origin.includes("localhost")) {
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes("hirring-intern")) {
       return callback(null, true);
     } else {
-      return callback(new Error("Not allowed by CORS"), false)
+      return callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// ⚠️ MAKE SURE: Yeh code aapke routes (jaise server.use('/api', ...)) se bilkul upar hona chahiye!
+
 
 
 connectDB();
