@@ -18,7 +18,7 @@ server.use(cors({
     if (origin.includes("hirring-intern") || origin.includes("localhost")) {
       return callback(null, true);
     } else {
-      return callback(new Error("Not allowed by CORS"), false);
+      return callback(new Error("Not allowed by CORS"), false)
     }
   },
   credentials: true
