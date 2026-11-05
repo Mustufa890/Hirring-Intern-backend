@@ -13,7 +13,8 @@ import cors from 'cors'; // ya const cors = require('cors');
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://hirring-intern-production.up.railway.app'
+  'https://hirring-intern-production.up.railway.app',
+  process.env.FRONTEND_URL
 ];
 
 app.use(cors({
