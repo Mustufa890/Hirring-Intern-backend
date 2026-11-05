@@ -9,10 +9,14 @@ const { initSocket } = require('./socket');
 
 const app = express()
 app.use(express.json())
-
 app.use(cors({
- origin:'http://localhost:5173' 
+  origin: [
+    'http://localhost:5173', 
+    'https://hirring-intern-production.up.railway.app'
+  ],
+  credentials: true // Agar aap cookies ya sessions use kar rahe hain
 }));
+
 
 connectDB();
 
