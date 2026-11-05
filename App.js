@@ -9,7 +9,7 @@ const { initSocket } = require('./socket');
 
 const app = express()
 app.use(express.json())
-import cors from 'cors'; // ya const cors = require('cors');
+const cors=require("cors"); // ya const cors = require('cors');
 
 const allowedOrigins = [
   'http://localhost:5173',
