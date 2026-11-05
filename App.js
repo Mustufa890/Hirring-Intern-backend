@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'https://hirring-intern-production.up.railway.app'
+    process.env.FRONTEND_URL
   ],
   credentials: true // Agar aap cookies ya sessions use kar rahe hain
 }));
