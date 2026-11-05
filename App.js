@@ -9,12 +9,19 @@ const { initSocket } = require('./socket');
 
 const app = express()
 app.use(express.json())
-app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    process.env.FRONTEND_URL
-  ],
-  credentials: true // Agar aap cookies ya sessions use kar rahe hain
+server.use(cors({
+  origin: function (origin, callback) {
+    // 1. Allow server-to-server, Postman, or local testing tools (no origin header)
+    if (!origin) return callback(null, true);
+    
+    // 2. Allow ANY subdomain or production domain containing your app name
+    if (origin.includes("hirring-intern") || origin.includes("localhost")) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"), false);
+    }
+  },
+  credentials: true
 }));
 
 
